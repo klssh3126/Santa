@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+			<meta charset="UTF-8">
+			<title>토이저러스</title>
+			<link rel="stylesheet" href="/css/SangHa.css">
+	</head>
+	<body>
+	
+		<main id="content" role="main" class="contentArea">
+			<div class="signupLayout">
+				<div class="signupWrapper">
+					<h2 class="santasignup">산타클로즈 회원가입</h2>
+				</div>
+				
+				<form th:action="@{/member/signup}" th:method="post" class="signupForm">
+			    	<div class="formArea">
+			    		<p><label>이메일</label></p>
+			    		<input type="text" name="email" placeholder="이메일">	
+			    	</div>
+			    	<div class="formArea">
+			    		<p><label>비밀번호</label></p>
+			    		<input type="password" name="pass" placeholder="비밀번호">	
+			    	</div>
+			    	<div class="formArea">
+			    		<p><label>이름</label></p>
+			    		<input type="text" name="name" placeholder="이름">	
+			    	</div>
+			    	
+			    	<!-- <div class="formArea">
+			    		<p><label>전화번호</label></p>
+			    		<input type="text" name="phone" placeholder="전화번호">	
+			    	</div>
+			    	
+			    	<div class="formArea">
+			    		<p><label>닉네임</label></p>
+			    		<input type="text" name="nickname" placeholder="닉네임">	
+			    	</div> -->
+
+			    	
+			    	<div class="btn">
+						<button class="signupbtn">
+							<a>회원가입완료</a>
+						</button>
+			    	</div>
+			    </form>
+				<div class="lotteBiWrap">
+					<h2 class="toysrusLogo">
+						<a href= "/">
+						<img src="/image/Won/logo.png" alt="ToysRus" class="loaded" width="130px">
+						</a>
+					</h2>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

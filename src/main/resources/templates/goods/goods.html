@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<meta charset="UTF-8">
+<head>
+
+
+
+<title>상품조회</title>
+<link rel="stylesheet" href="/css/Wonmo.css">
+<script src="https://kit.fontawesome.com/9b58802993.js"
+	crossorigin="anonymous"></script>
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap"
+	rel="stylesheet">
+<!-- 채원님 폰트 설정 주의 -->
+<link rel="stylesheet" href="/css/Won.css">
+<script src="/js/SiHyun.js" defer></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<style>
+table {
+	width: 100%;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #444444;
+}
+
+</style>
+
+
+
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap"
+	rel="stylesheet">
+<!-- 채원님 폰트 설정 주의 -->
+<script src="/css/Won.js" defer></script>
+
+
+
+<script th:inline="javascript">
+	$(document)
+			.ready(
+					function() {
+
+						var no = $("#no").val();
+						//댓글이 추가될 영역
+						var listGroup = $(".replyList");
+
+						//날짜 처리를 위한 함수
+						function formatTime(str) {
+							var date = new Date(str);
+
+							return date.getFullYear() + '/'
+									+ (date.getMonth() + 1) + '/'
+									+ date.getDate() + ' ' + date.getHours()
+									+ ':' + date.getMinutes();
+						}
+
+						//특정한 게시글의 댓글을 처리하는 함수
+						function loadJSONData() {
+							$
+									.getJSON(
+											'/common/replies/goods/' + no,
+											function(arr) {
+
+												console.log(arr);
+
+												var str = "";
+
+												$('.replyCount').html(
+														" 상품 리뷰 보기 "
+																+ arr.length);
+
+												$
+														.each(
+																arr,
+																function(idx,
+																		reply) {
+																	console
+																			.log(reply);
+																	str += '			<div class="card-body" data-r_num="'+ reply.r_num +'"> 댓글번호: <b>'
+																			+ reply.r_num
+																			+ '</b><br>';
+																	str += ' 상품내용:		<span class="card-title">'
+																			+ reply.r_content
+																			+ '</span><br>';
+																	str += ' 회원번호:  	<span class="card-mno">'
+																			+ reply.mno
+																			+ '</span><br>';
+																	str += '  평점:		<span class="card-grade">'
+																			+ reply.grade
+																			+ '</span><br>';
+																	//  str += ' 	<h6 class="card-subtitle mb-2 text-muted">'+reply.replyer+'</h6>'; 
+																	str += ' 상품평 등록일자: <span class ="card-text">'
+																			+ formatTime(reply.r_reg_date)
+																			+ '</span>';
+																	str += '    </div>';
+																})
+
+												listGroup.html(str);
+											});
+						}
+
+						$(".replyCount").click(function() {
+
+							loadJSONData();
+						})//end click
+
+						var modal = $('.modal');
+
+						$(".addReply").click(function() {
+							jQuery.noConflict(); 
+							modal.modal('show');
+
+							//댓글 입력하는 부분 초기화 시키기
+							// 	$('input[name="grade"]').val('');
+							//	$('input[name="mno"]').val(''); 
+
+							$(".modal-footer .btn").hide(); //모달 내의 모든 버튼을 안 보이도록
+							$(".replySave, .replyClose").show(); //필요한 버튼들만 보이도록
+						});
+
+						$(".replySave")
+								.click(
+										function() {
+											var reply = {
+												no : no,
+												mno : $('input[name="mno"]')
+														.val(),
+												r_content : $(
+														'input[name="r_content"]')
+														.val(),
+												grade : $('input[name="grade"]')
+														.val()
+
+											}
+
+											console.log(reply);
+
+											$
+													.ajax({
+														url : '/common/replies/',
+														method : 'post',
+														data : JSON
+																.stringify(reply),
+														contentType : 'application/json; charset=utf-8',
+														dataType : 'json',
+														success : function(data) {
+															console
+																	.log("data입니다."
+																			+ data);
+
+															var newRno = parseInt(data);
+
+															alert(newRno
+																	+ "번 댓글이 등록되었습니다.");
+															modal.modal('hide');
+															loadJSONData();
+														}
+													})
+										});
+
+						$('.replyList')
+								.on(
+										"click",
+										".card-body",
+										function() {
+
+											var r_num = $(this).data("r_num");
+											$("input[name='r_content']").val(
+													$(this).find('.card-title')
+															.html());
+											$("input[name='mno']").val(
+													$(this).find('.card-mno')
+															.html());
+											$("input[name='r_num']").val(r_num);
+											$("input[name='grade']").val(
+													$(this).find('.card-grade')
+															.html());
+
+											$(".modal-footer .btn").hide();
+											$(
+													".replyRemove, .replyModify, .replyClose")
+													.show();
+
+											modal.modal('show');
+										});
+
+						$(".replyRemove").on("click", function() {
+
+							var r_num = $("input[name='r_num']").val(); //모달창에 보이는 댓글 번호 hidden으로 처리되어 있음
+
+							$.ajax({
+								url : '/common/replies/' + r_num,
+								method : 'delete',
+								success : function(result) {
+									console.log("result: " + result);
+									if (result === 'success') {
+										alert("댓글이 삭제되었습니다");
+										modal.modal('hide');
+										loadJSONData();
+									}
+								}
+							})
+						});
+
+						$(".replyModify")
+								.click(
+										function() {
+											var r_num = $("input[name='r_num']")
+													.val();
+											var reply = {
+												r_num : r_num,
+												mno : $('input[name="mno"]')
+														.val(),
+												no : no,
+												r_content : $(
+														'input[name="r_content"]')
+														.val(),
+												grade : $('input[name="grade"]')
+														.val()
+											}
+
+											console.log(reply);
+											$
+													.ajax({
+														url : '/common/replies/'
+																+ r_num,
+														method : 'put',
+														data : JSON
+																.stringify(reply),
+														contentType : 'application/json; charset=utf-8',
+														success : function(
+																result) {
+
+															console
+																	.log("RESULT: "
+																			+ result);
+
+															if (result === 'success') {
+																alert("댓글이 수정되었습니다.");
+																modal
+																		.modal('hide');
+																loadJSONData();
+															}
+														}
+													});
+										});
+
+					});
+</script>
+
+
+</head>
+<body>
+	<main class="contentArea">
+		<div class="productWrap">
+			<div class="productTopContents" id="info">
+				<div class="prodectVisualWrap">
+					<div class="swiper-wrapper">
+						<div class="sideImgWrap">
+						</div>
+					</div>
+					<div class="mainImgWrap">
+						<div class="mainImgBC"></div>
+						<img data-v-02fae411=""
+							th:src="${detail.defImgUrl}"
+							alt="[사전예약] 슈퍼마리오 20인치 자이언트" class="mainImg"
+							width= 280px;>
+					</div>
+					
+					
+					
+				</div>
+				<div class="productDetailTop">
+					<div class="productTitle">
+						<div class="productNameLine">
+							<h4 class="productName">[[${detail.title}]]</h4>
+							<input type="hidden" id="no" th:value="${detail.no}">
+
+							<div class="util-float">
+								<a href="#"
+									style="width: 31px; margin-bottom: 10px; text-decoration: none;"
+									class="fa-solid fa-heart"> </a> <a href="#"
+									style="width: 28px; text-decoration: none;"
+									class="fa-solid fa-share-nodes"></a>
+							</div>
+							<div class="productReview">
+								<div class="grade">
+									<div class="starBox">
+										<img class="star_img"
+											src="https://static.lotteon.com/p/product/assets/img/icon_star_full.svg"
+											alt=""> <img class="star_img"
+											src="https://static.lotteon.com/p/product/assets/img/icon_star_full.svg"
+											alt=""> <img class="star_img"
+											src="https://static.lotteon.com/p/product/assets/img/icon_star_full.svg"
+											alt=""> <img class="star_img"
+											src="https://static.lotteon.com/p/product/assets/img/icon_star_full.svg"
+											alt=""> <img class="star_img"
+											src="https://static.lotteon.com/p/product/assets/img/icon_star_full.svg"
+											alt="">
+									</div>
+									<!--/*<span>&nbsp[[${dto.avg}]]</span>
+												<span>&nbsp&nbsp[[${dto.reviewCnt}]]</span>*/-->
+								</div>
+								<span class="monthlyPurchase">월간구매 17</span> <a href="#"
+									class="appButton">APP으로 보기</a>
+							</div>
+						</div>
+					</div>
+					<div class="priceWrap">
+						<div class="priceInfo">
+
+							<!--상품 단일금액-->
+
+							<span
+								style="font-size: 30px; font-family: 'Noto Sans KR', sans-serif; font-weight: 600">[[${detail.price}]]</span>
+							<span
+								style="font-size: 24px; font-family: 'Noto Sans KR', sans-serif; position: absolute; top: 5px; left: 102px;">원</span>
+						</div>
+						<div class="applyBenefit">
+							<span
+								style="font-size: 16px; font-family: 'Noto Sans KR', sans-serif; margin-top: 8px;">주문
+								시 적용되는 할인을 확인하세요</span>
+							<button class="btnApplyBenefit">
+								<span>혜택보기</span>
+							</button>
+						</div>
+						<button onclick="location.href='#'" class="lotteOnersBanner">
+							<span
+								style="padding-left: 7px; font-weight: bold; font-size: 14px;">롯데오너스</span>
+							<span style="font-weight: 400; font-size: 13px;">무료배송 · 추가
+								0.5% 적립</span> <span style="margin-left: 180px"><a
+								style="text-decoration: none;" href="#">》</a></span>
+						</button>
+					</div>
+					<div class="optionContent">
+						<div class="priceOptionWrap">
+							<div class="priceOptionBox">
+								<span
+									style="font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: #757575">
+									1일 동안 최대 10개 구매 가능</span>
+
+
+
+								<!--상품수량 변경, 총 상품금액 -->
+								<div class="price">
+									<input type="hidden" id="price2" th:value="${detail.price}">
+									<input type="number" id="quantity" min="1" th:max="${10}"
+										value="1" onchange="quantityChanged()"> <span
+										class="price-num"> <i>총 상품 금액</i> <i
+										th:text="${#numbers.formatInteger(detail.price,0,'COMMA')}"
+										id="total-price">수량따른 금액표현</i>
+									</span> <i class="price-won">원</i>
+								</div>
+
+
+
+							</div>
+						</div>
+
+					</div>
+					<div class="buttonGroup">
+						<button class="giftButton">
+							<span>선물하기</span>
+						</button>
+
+
+
+						<!-- 클릭하면 AJAX POST -->
+						<button class="cartButton" id="btn-cart"
+							onclick="btnCartClicked()">
+							<span>장바구니 담기</span>
+						</button>
+
+
+
+<script>
+function btnOrderClicked(){
+	var quantity=$("#quantity").val();
+	var itemNo=$("#no").val();
+	
+	location.href=`/user/order?itemNo=${itemNo}&quantity=${quantity}`;
+}
+</script>
+						<button class="buyButton" onclick="btnOrderClicked()">
+							<span>바로 구매하기</span>
+						</button>
+					</div>
+					<div class="purchaseInfoBox">
+						<div class="purchaseInfoBoxContent">
+							<span style="color: #4185ED">오늘 14:50~18:30 도착 예정</span> <span>-당일배송</span>
+							<a href="#" class="moreImfomationBtn">더보기</a> <span><a
+								style="text-decoration: none;" href="#">》</a></span>
+							<p style="margin-top: 0px;">3,000원(혜택가 4만원 이상 구매 시 무료)</p>
+							<p>선물하기 상품은 택배로 배송됩니다.</p>
+							<span>스마트픽</span> <span><a style="text-decoration: none;"
+								href="#">》</a></span>
+						</div>
+					</div>
+
+					<div class="purchaseInfoBox-cardBenefit">
+						<div class="cardBenefitContent">
+							<span class="cardBenefitText">결재혜택&nbsp&nbsp&nbsp&nbsp무이자
+								할부 안내</span> <a href="#" class="moreImfomationBtn">더보기</a>
+						</div>
+					</div>
+					<div class="purchaseInfoBox-savingBenefit">
+						<div class=savingBenefitContent>
+							<span class="cardBenefitText">적립혜택&nbsp&nbsp&nbsp&nbspL.POINT
+								최대 63P</span> <a href="#" class="moreImfomationBtn">더보기</a>
+						</div>
+					</div>
+					<div class="seller-buttonWrap">
+						<div class="seller-info">
+							<img data-v-289445aa=""
+								src="https://contents.lotteon.com/product/sellerimg/bi-toysrus.png"
+								alt="seller profile" class="seller-infoImg"> <span
+								class="seller-infoText">토이저러스</span>
+							<button class="seller-infoBtn">
+								<p class="seller-infoBtnText">문의하기</p>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/* <div id="WonmoDetail">
+					[[${detail.content}]] 
+					
+					<div>
+					*/-->
+			<div class="YW_review">
+				<div>
+					<div class="mt-4">
+						<h5>
+							<span class="badge badge-info addReply"> 상품 리뷰 쓰기</span>
+						</h5>
+						<h5>
+							<span class="badge badge-secondary replyCount"> 상품 리뷰 보기   [[${reviewCnt}]] 
+							</span>
+						</h5>
+					</div>
+					<div class="list-group replyList"></div>
+				</div>
+
+				<div class="modal" tabindex="-1" role="dialog">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">리뷰 작성하기</h5>
+
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<!-- <label>회원번호</label>  --><input class="form-control" type="hidden"
+										name="mno" placeholder="mno" th:value=${mno}>
+										
+										
+								</div>
+								<div class="form-group">
+									<label>평점</label> <input class="form-control" type="text"
+										name="grade" placeholder="grade">
+								</div>
+								<div class="form-group">
+									<label>상품 후기</label> <input class="form-control" rows="5"
+										name="r_content"></input> <input type="hidden" name="r_num">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger replyRemove">Remove</button>
+								<button type="button" class="btn btn-warning replyModify">Modify</button>
+								<button type="button" class="btn btn-primary replySave">Save</button>
+								<button type="button"
+									class="btn btn-outline-secondary replyClose"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="WonmoReview">
+						<a th:href="@{/qna/reg/(itemNo=${detail.no})}">상품문의작성</a>
+						<table>
+							<tr>
+								<td>문의글내용</td>
+								<td>문의작성일</td>
+								<td>문의수정일</td>
+							</tr>
+							
+							<tr th:each="qna:${qnaResult}">
+								<td>
+									<!--5단계까지 들여쓰기-->
+									<span th:if="${qna.depth} > 0" 
+									th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+									<span th:if="${qna.depth} > 1" 
+									th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+									<span th:if="${qna.depth} > 2" 
+									th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+									<span th:if="${qna.depth} > 3" 
+									th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+									<span th:if="${qna.depth} > 4" 
+									th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+								
+								
+									<!--문의내용, 문의답변내용-->
+									<a th:unless="${#strings.contains(qna.content, '삭제된글입니다.')}"
+									th:href="@{/qna/answer/(itemNo=${detail.no}, no=${qna.no})}">
+										[[${qna.content}]]
+									</a>
+									<span th:if="${#strings.contains(qna.content, '삭제된글입니다')}">[[${qna.content}]]</span>
+									
+									<!--삭제버튼-->
+									<a th:unless="${#strings.contains(qna.content, '삭제된글입니다.')}"
+									th:href="@{/qna/delete/(itemNo=${detail.no}, no=${qna.no})}" style="float: right;">삭제</a>
+								</td>
+								
+								<!--날짜-->
+								<td>
+									<span th:unless="${#strings.contains(qna.content, '삭제된글입니다.')}">
+									[[${#temporals.format(qna.regDate, 'yyy/MM/dd')}]]
+									</span>
+								</td>
+								<td>
+									<span th:unless="${#strings.contains(qna.content, '삭제된글입니다.')}">
+									[[${#temporals.format(qna.modDate, 'yyy/MM/dd')}]]
+									</span>
+								</td>
+							</tr>
+						</table>
+						</div>
+</main>
+</body>
+</html>
+

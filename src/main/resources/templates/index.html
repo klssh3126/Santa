@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+</head>
+<!-- /////////////////////////////////////////////////// -->
+<!-- ///////main  ////////////////////////////////////// -->
+<!-- /////////////////////////////////////////////////// -->
+
+
+<main>
+<h1>메인컨텐츠</h1>
+	<section id="visual">
+		<h1>비주얼영역</h1>
+		<div class="wrap">
+			<div class="area">
+				<ol class="flex visuals">
+					<li th:each="num : ${#numbers.sequence(1,5)}"><a href="#"
+						th:style="|background-image: url('/image/YoungWook/visual${num}.jpg');|">
+					</a></li>
+				</ol>
+				<div class="cover">
+					<div class="side left"></div>
+					<div class="side right"></div>
+				</div>
+				<div class="btn-wrap">
+					<button class="btn prev"></button>
+					<button class="btn next"></button>
+				</div>
+				<div class="btn_toggle">
+					<div class="play" onclick="toggleImg();"></div>
+					<div id="btn_list">
+						0<span id="wrap_list">1</span> <span id="list_denominator">/
+							05 </span> +
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="menu">
+		<h1>메뉴영역</h1>
+		<div class="wrap">
+			<div class=" area">
+				<ul class="flex center menus">
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/menu2.png');|">
+					</a> <span class="text">산타 아울렛</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/menu3.png');|">
+					</a> <span class="text">무료배송</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/menu4.png');|">
+					</a> <span class="text">이벤트&쿠폰</span></li>
+				</ul>
+				<div class="title">
+					<div class="today_recommend">CICD-TEST-자동배포</div>
+				</div>
+				<div id="time_remain">
+					<div class="text">남은시간</div>
+					<div class="time">
+						<div id="the-final-countdown">
+							<p>18 : 20 : 24</p>
+						</div>
+					</div>
+					<img src="/image/YoungWook/space.png"></img>
+				</div>
+
+
+				<ul class="flex  between today_item">
+					<li><a href="/goods"
+						th:style="|background-image: url('/image/YoungWook/item1.jpg');|">
+					</a>
+						<div class="text1">마인크래프트-레고</div> <span class="text2">16%</span>
+						<span class="text3"> <del>59,900원</del></span>
+						<div class="text4">
+							49,900 <span class="text3"> 원</span>
+						</div>
+						<div class="text5">크리스마스 얼리버드 특가로 선물준비!</div></li>
+
+
+
+
+					<li><a href="/goods"
+						th:style="|background-image: url('/image/YoungWook/item2.jpg');|">
+					</a>
+						<div class="text1">슈퍼마리오 인형</div> <span class="text2">20%</span> <span
+						class="text3"> <del>135,900원</del></span>
+						<div class="text4">
+							108,700 <span class="text3"> 원</span>
+						</div>
+						<div class="text5">크리스마스 사전예약! 특별증정품까지 득템찬스!</div></li>
+				</ul>
+
+
+
+
+				<!-- <div id="now_demanded_item">
+					<div class="title">
+					지금 많이 찾는 상품
+					</div>
+					
+					<span id="popular-search-terms">
+						<span class="srh-item">인기 검색어</span>
+						
+						<span class="rank_box">
+							<div class="srh_rank">3</div>
+							<div class="srh_goods">포켓몬카드</div>
+							<span class="change_rank">3</span>
+							<span class="change_rank">▲</span>
+						</span>
+						
+						
+						<span class="rank_box">
+							<div class="srh_rank">4</div>
+							<div class="srh_goods">레고</div>
+							<span class="change_rank"> ㅡ </span>
+						</span>
+					</span>
+				</div> -->
+
+				<!-- 		<div class="title">
+								금주의 TOY TV
+				</div> -->
+				<div class="title">인기 브랜드 매장</div>
+				<ul class="flex center famous-store">
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store1.png');|">
+					</a> <span class="text">레고</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store2.png');|">
+					</a> <span class="text">닌텐도</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store3.png');|">
+					</a> <span class="text">플레이슽이션</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store4.png');|">
+					</a> <span class="text">헬로카봇</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store5.png');|">
+					</a> <span class="text">포켓몬</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store6.jpeg');|">
+					</a> <span class="text">해즈브로</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store7.png');|">
+					</a> <span class="text">실바니안패밀리</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store8.png');|">
+					</a> <span class="text">미미월드</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store9.png');|">
+					</a> <span class="text">타요</span></li>
+					<li><a href="#"
+						th:style="|background-image: url('/image/YoungWook/store10.png');|">
+					</a> <span class="text">뽀로로</span></li>
+
+				</ul>
+
+				<div class="title">지금 꼭 사야할 추천 상품</div>
+				
+				<div class="must-have-item">
+					<ul class="category flex">
+						<li class="left_side Category_button active" onclick="btn_color_change(1);">
+								<span class="Category_title">
+								<a th:href="|/common/category/1/goods|" >
+								 핫딜 </a>
+								 </span>
+						</li>
+						<li class="Category_button" onclick="btn_color_change(2);">
+								<span class="Category_title">
+								<a th:href="|/common/category/2/goods|" >
+								 블록 </a>
+								 </span>
+						</li>
+						<li class="Category_button" onclick="btn_color_change(3);">
+								<span class="Category_title"> 
+								<a th:href="|/common/category/3/goods|" >
+								전자게임
+								</a>
+								</span>
+						</li>
+						<li class="Category_button" onclick="btn_color_change(4);">
+								<span class="Category_title"> 
+								<a th:href="|/common/category/4/goods|" >
+								로봇/작동
+								</a>
+								</span>
+								
+						</li>
+						<li class="Category_button" onclick="btn_color_change(5);">
+								<span class="Category_title"> 
+								<a th:href="|/common/category/5/goods|" >
+								인형
+								</a>
+								</span>
+						</li>					
+						<li class="left_side Category_button" onclick="btn_color_change(6);">
+								<span class="Category_title"> 
+								<a th:href="|/common/category/6/goods|" >
+								영어완구
+								</a>
+								</span>
+						</li>
+						<li class="Category_button" onclick="btn_color_change(7);">
+								<span class="Category_title">
+								<a th:href="|/common/category/7/goods|" >
+								 역할놀이
+								 </a>
+								 </span>
+						</li>
+						<li  class="Category_button" onclick="btn_color_change(8);">
+								<span class="Category_title">
+								<a th:href="|/common/category/8/goods|" >
+								 승용/시즌완구
+								 </a>
+								 </span>
+						</li>
+					</ul>
+					<div class="test_wrap">
+						<ul class="flex goods between">
+							<li>
+								<a href="#" th:style="|background-image: url('/image/YoungWook/goods1.jpg');|"></a>
+								<span class="text1"> 택배배송
+								</span>
+								<div class="text2"> 스위치 본체 특가
+								</div>
+								<div class="text3">340,000
+									<span class="text4">원~</span>
+								</div>
+								<div class="cart">
+									<a href="#" th:style="|background-image: url('/image/YoungWook/icon_cart_toy.svg');|"></a>
+								</div>
+							</li>
+							<li>
+								<a href="#" th:style="|background-image: url('/image/YoungWook/goods2.jpg');|"></a>
+								<span class="text1"> 택배배송
+								</span>
+								<div class="text2"> 스위치 포켓몬 시리즈 살수록 더 싸게!
+								</div>
+								<div class="text3">29,900
+									<span class="text4">원~</span>
+								</div>
+								<div class="cart">
+									<a href="#" th:style="|background-image: url('/image/YoungWook/icon_cart_toy.svg');|"></a>
+								</div>
+							</li>
+							<li>
+								<a href="#" th:style="|background-image: url('/image/YoungWook/goods3.jpg');|"></a>
+								<span class="text1"> 택배배송
+								</span>
+								<div class="text2"> 레고 인기상품!크리스마스 특별할인!
+								</div>
+								<div class="text3">71,900
+									<span class="text4">원~</span>
+								</div>
+								<div class="cart">
+									<a href="#" th:style="|background-image: url('/image/YoungWook/icon_cart_toy.svg');|"></a>
+								</div>
+							</li>
+							<li>
+								<a href="#" th:style="|background-image: url('/image/YoungWook/goods4.jpg');|"></a>
+								<span class="text1"> 택배배송
+								</span>
+								<div class="text2"> 가족 친구와 함께 연말엔 보드게임!
+								</div>
+								<div class="text3">5,500
+									<span class="text4">원~</span>
+								</div>
+								<div class="cart">
+									<a href="#" th:style="|background-image: url('/image/YoungWook/icon_cart_toy.svg');|"></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				
+				
+	</section>
+
+
+
+</main>
+</html>

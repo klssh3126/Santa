@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title>산타클로스</title>
+		<link rel = "stylesheet" href = "/css/Won.css">
+		<script src="/css/Won.js"></script>
+
+	</head>
+	
+	<body >
+	<!--///제일 위에 상단///  -->
+		<header id="header1">
+			<div class="headerWrapper">
+				<div class="firstContent">
+					<div class="accountArea">
+						<ul>
+							<!-- 로그아웃한 방문자에게만 보입니다.-->
+							<li sec:authorize="isAnonymous()">
+								<a href="/login">로그인</a>
+								<a href="/signup">회원가입</a>
+							</li>
+							
+							<!-- 로그인한 방문자에게만 보입니다. -->
+							<li sec:authorize="isAuthenticated()">
+									<!-- <span th:text="${#authentication.name+'(이름)'}">유저네임정보</span> -->
+									<span sec:authentication="principal.email"></span>
+									(
+									<span th:if="${#authentication.principal.nickName==null}"  sec:authentication="principal.name"></span>
+									<span th:if="${#authentication.principal.nickName!=null}" sec:authentication="principal.nickName"></span>
+									)
+									<a href="/logout">로그아웃</a>
+							</li>
+							
+							<!-- ADMIN로그인 시 접근 가능합니다. -->
+							<li sec:authorize="hasRole('ADMIN')">
+								<a href="/admin">관리자페이지</a>
+							</li>
+							
+							<!-- 상시표기됩니다. -->
+							<li>
+								<a href="">주문배송</a>
+								<a href="/customerCenter/customercenter">고객센터</a>
+							</li>
+						</ul>
+					</div>
+				</div>	
+					<!--///가운데 상단///  -->
+				<div class="headerMain">
+					<h1 class="toysrusLogo">
+						<a href= "/">
+						<img src="https://static.lotteon.com/p/common/foCommon/assets/img/logo_toysrus.png" alt="ToysRus" class="loaded">
+						</a>
+					</h1>
+					<p id="branch">
+						<button type="button">중계점</button>
+					</p>
+					<div class="searchAreaWrap">
+						<div class="searchArea">
+							<label for="headerSearchId" class="blind">검색어</label>
+							<input title="검색어 입력" id="headerSearchId" type="text"
+							autocomplete="off" placeholder="검색어를 입력하세요" aria-label="검색어를 입력하세요"
+							class="default">
+							<button type="button" id="btnSearchInner">
+								<span class="blind">검색</span>
+							</button>
+						</div>
+					</div>
+					<div id="buttonArea">
+						<ul>
+							<li>
+								<a href="" class="chat">챗봇</a>
+							</li>
+							<li><a href="" class="heart">나의 찜</a>
+							</li>
+							<li><a href="/mypage" class="my">마이페이지</a>
+							</li>
+							<li><a href="/user/cart" class="cart">장바구니</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--///제일밑에 상단///-->	
+				<hr class="line">
+				<div class="sub">
+					<div class="innerContent">
+						<div class="category toysrus">
+							<div class="moreViewWrap">
+								<button type="button" class="moreView">
+									<span class="blind">전체 카테고리 보기</span>
+									<span class="bar">
+									
+									</span>
+								</button>
+								<div class="categoryMenu">
+									<div class="blind">
+										<a href="menuInner">카테고리 건너뛰기</a>
+									</div>
+									<div class="dep1">
+										<ul class="sub">
+											<li>
+												<a href="#" class="title on">
+													<span class="text">신생아 유아</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>신생아/영아완구</span></a></li>
+													<li><a href=""><span>유아완구</span></a></li>
+													<li><a href=""><span>유아용품</span></a></li>
+													<li><a href=""><span>실내/대형완구</span></a></li>
+												</ul>
+											</li>
+											
+											<li>
+												<a href="#" class="title">
+													<span class="text">역할놀이/인형/꾸미기</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>역할놀이완구</span></a></li>
+													<li><a href=""><span>인형완구</span></a></li>
+													<li><a href=""><span>꾸미기완구</span></a></li>
+													<li><a href=""><span>DIY/취미완구</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">액션/조종/자동차</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>역할놀이완구</span></a></li>
+													<li><a href=""><span>액션완구</span></a></li>
+													<li><a href=""><span>RC조종완구</span></a></li>
+													<li><a href=""><span>작동완구</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">교육완구</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>블록놀이</span></a></li>
+													<li><a href=""><span>보드/퍼즐</span></a></li>
+													<li><a href=""><span>학습완구</span></a></li>
+													<li><a href=""><span>도서</span></a></li>
+													<li><a href=""><span>S.T.E.A.M</span></a></li>
+												</ul>
+												
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">연령별</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>연령별완구</span></a></li>
+													<li><a href=""><span>신생아(0~2)세</span></a></li>
+													<li><a href=""><span>토들러(3~5)세</span></a></li>
+													<li><a href=""><span>키즈(6~8세)</span></a></li>
+													<li><a href=""><span>주니어(9세~)</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">TRU단독존</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>브랜드별완구</span></a></li>
+													<li><a href=""><span>애니멀앨리</span></a></li>
+													<li><a href=""><span>패스트레인</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">프라모델/피규어/BB탄</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>피규어</span></a></li>
+													<li><a href=""><span>프라모델</span></a></li>
+													<li><a href=""><span>서바이벌건/BB탄총</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+												<span class="text">스낵</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>과자/캔디/젤리</span></a></li>
+													<li><a href=""><span>과자</span></a></li>
+													<li><a href=""><span>캔디</span></a></li>
+													<li><a href=""><span>젤리</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">스포츠/야외완구</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>자전거/승용완구</span></a></li>
+													<li><a href=""><span>스포츠</span></a></li>
+													<li><a href=""><span>버블놀이</span></a></li>
+													<li><a href=""><span>모래놀이</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">시즌/파티완구</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>파티완구</span></a></li>
+													<li><a href=""><span>여름시즌</span></a></li>
+													<li><a href=""><span>겨울시즌</span></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#" class="title">
+													<span class="text">전자게임</span>
+												</a>
+												<ul class=sub-sub>
+													<li><a href=""><span>플레이스테이션</span></a></li>
+													<li><a href=""><span>액세서리/기타게임</span></a></li>
+													<li><a href=""><span>닌텐도</span></a></li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="menu">
+								<div id="menuInner" tabindex="0" class="menuInner">
+									<ul>
+										<li class="today">
+											<a href="">
+											 오늘의토이 
+												<span class="blind"> 선택됨 </span>
+											</a>
+										</li>
+										<li>
+											<a href="">
+											   신상품 
+												<span class="blind"> 선택됨 </span>
+											</a>
+										</li>
+										<li>
+											<a href="">
+											  키덜트존 
+												<span class="blind"> 선택됨 </span>
+											</a>
+										</li>
+										<li>
+											<a href="">
+											  베스트 
+												<span class="blind"> 선택됨 </span>
+											</a>
+										</li>
+										<li>
+											<a href="">
+											  기획전 
+												<span class="blind"> 선택됨 </span>
+											</a>
+										</li>
+									</ul>
+									<button type="button" class="btnMenuCloser">
+										<span class="blind">전체보기 닫기</span>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="trending">
+							::before
+							<button type="button" class="moreView">
+								<span class="blind">전체 순위 보기</span>
+							</button>
+							<div class="preview">
+								<div class="swiper-container wiper-container-initialized" tabindex="0">
+									<div class="swiper-wrapper" style="transform:translate3d(0px, 0px , 0px); transition-duration:0ms;">
+									</div>
+									<span class="swpier-notification" aria-live="assertive" aria-atomic="true"></span>
+								</div>
+							</div>	
+						</div>
+					</div>
+					<hr class="toysrus">
+				</div>	
+			  </div>
+			
+		</header>
+
+		<footer id="footer">
+			<div class=wideArea>
+				<div class="footerTopMenu innerContent">
+					<ul class="color">
+						<li>
+							<a href="" target="_blank" title="새창">산타클로스 소개</a>
+						</li>
+						<li>
+
+							<a href="">지점안내</a>
+						</li>
+						<li>
+
+							<a href="">이용약관</a>
+						</li>
+						<li>
+
+							<a href="">전자금융거래약관</a>
+						</li>
+						<li>
+
+							<a href="" class="bold">개인정보처리방침</a>
+						</li>
+						<li>
+
+							<a href="">청소년보호방침</a>
+						</li>
+						<li>
+
+							<a href="">임직원등록</a>
+						</li>
+					</ul>
+					<div class="selectMenu">
+						<div class="dropDownMenu familySite">
+							<button type="button" title="클릭 시 목록 열림" class="dropDownTrigger">
+								Family Site
+							</button>
+							<ul class="dropDownList active">
+								<li>
+									<a href="#" target="_target" title="새창에서 열림">산타지주</a>
+								</li>
+								<li>
+									<a href="#" target="_target" title="새창에서 열림">산타건설</a>
+								</li>
+								<li>
+									<a href="#" target="_target" title="새창에서 열림">산타글로벌</a>
+								</li>
+								<li>
+									<a href="#" target="_target" title="새창에서 열림">산타렌탈</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--///footer 가운데 하단///  -->
+				<hr>
+				<div class="companyInfo innerContent">
+					<h2 class="toysrusLogo">
+						<img alt="ToysRus" border="0" height="78" hspace="0" src="https://contents.lotteon.com/ec/public/injectImage.20200228113625.1.png">
+					</h2>
+				
+					<div class="infoWrapper">
+						<div class="company">
+							<h3>산타쇼핑 주식회사</h3>
+							<ul>
+								<li>대표이사: 산타클로스, 루돌프, 올라프</li>
+								<li>주소: 서울특별시 송파구 올림픽로 300 롯데월드타워 30층</li>
+								<li>사업자등록번호 : 000-00-00111(산타쇼핑(주) e산타스사업부</li>
+								<li>통신판매업 신고: 서울송파 제01호
+									<a href="" target="_blank" title="새창">사업자 정보 확인</a>
+								</li>
+								<li>호스팅 서비스사업자 : 산타쇼핑(주) e산타스사업부</li>
+							</ul>
+							<h4>산타쇼핑 e산타스 사업부 에스크로</h4>
+							<p>
+								고객님의 안전거래를 위해 현금 등으로 결제 시 결제금액 전액에 대해
+								<br>
+								소비자 피해 방지 서비스를 이용합니다.
+							</p>
+						</div>
+						<div class="customer">
+							<h3>고객센터 1111-7777(유료)</h3>
+							<div class="stringLine withList" style="margin-bottom: 5px;">
+								<p class="underline">
+									<a href="">분쟁해결기준</a>
+								</p>
+							</div>
+							<div class="stringLine withList">
+								<ul class="faqListWrap">
+									<li>
+										<a href="">FAQ 보기</a>
+									</li>
+									<li>
+										<a href="">1:1 문의하기</a>
+									</li>
+									<li>
+										<a href="">고객센터</a>
+									</li>
+								</ul>
+							</div>
+							<h3>전자금융거래 분쟁 담당</h3>
+							<div class="stringLine withList">
+								<p class=nounderline>Tel: 1111-7777(유료)</p>
+								<p>
+									E-mail :
+									<a href="" class=underline>SantaClaus@santa.net</a>
+								</p>
+								<p>
+									<a href="" target="_blank" title="새창">안전거래센터</a>
+								</p>
+							</div>
+							<div class="v-popover">
+								<div aria-describedy="popover_9nzfhrgdtt" class="trigger" style="display: inline-block">
+								<h3>
+									콘텐츠산업진흥법에 의핸 콘텐츠보호안내
+									<button id="tooltip-target">자세히보기</button>
+								</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="outlink">
+						<li>
+							<img alt="NSCI. 8년 연속 1위" src="https://contents.lotteon.com/ec/public/footer-img-logo-6.png">
+						</li>
+						<li>
+							<img alt="KCSI. 2년 연속 1위" src="https://contents.lotteon.com/ec/public/footer-img-logo-7.png">
+						</li>
+						<li>
+							<img alt="KSQI. 2019년 1위" src="	https://contents.lotteon.com/ec/public/footer-img-logo-8.png
+							">
+						</li>
+						<li>
+							<img alt="한국서비스대상. 4년 연속 대상" src="https://contents.lotteon.com/ec/public/footer-img-logo-9.png">
+						</li>
+						<li>
+							<img alt="한국의 가장 사람받는 브랜드. 2년 연속 대상" src="	https://contents.lotteon.com/ec/public/footer-img-logo-10.png">
+						</li>
+						<li>
+							<a href="" target="_blank" title="새창">
+								<img alt="손말이음센터. 연중무휴 국번없이 107. 청각/언어 장애인 의사소통 지원" src="https://contents.lotteon.com/ec/public/footer-img-logo-5.png">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<hr>
+				<div class="footerInfo">
+					<p>Copyright © SANTASHOPPING Co., LTD. All rights reserved.</p>
+				</div>
+			</div>
+
+		</footer>
+	</body>
+</html>
+>>>>>>> refs/heads/SiHyun

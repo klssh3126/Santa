@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품문의작성페이지</title>
+</head>
+<body>
+	<form th:action="@{/qna/reg/(itemNo=${itemNo})}" method="POST">
+		<input type="text" name="content" placeholder="내용입력">
+		<input type="hidden" name="productPNum" th:value="${itemNo}"><!-- 상품정보값 자동입력 -->
+		<button>등록하기</button>
+	</form>
+</body>
+</html>

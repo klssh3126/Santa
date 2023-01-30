@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+	<meta charset="UTF-8">
+	<title>고객센터메인:산타클로스</title>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap" rel="stylesheet"> <!-- 채원님 폰트 설정 주의 -->
+	<link rel = "stylesheet" href = "/css/SiHyun.css">
+	<link rel = "stylesheet" href = "/css/Won.css">
+	<script src = "/js/SiHyun.js"></script>
+	
+</head>
+<body>
+	<header th:replace="layout/headerfooter :: header"></header>
+
+	<main id = "ysh">
+		<div class = "Lwrap">
+			<h2 class = "Ltitle">고객센터</h2>
+			<ul class = "Lmenu">
+				<li class = "LmenuLi"><a href = "#">쇼핑FAQ</a></li>
+				<li class = "LmenuLi"><a href = "#">판매FAQ</a></li>
+				<li class = "LmenuLi"><a href = "#">공지사항</a></li>
+				<li class = "LmenuLi"><a href = "#">1:1 문의하기</a></li>
+
+			</ul>
+			<div class = "customerCenter">
+				<div class = "title">산타클로스 고객센터</div>
+				<div class = "tellNum">
+					<span class = "num">1234-1234</span>
+					<span class = "cash">(유료)</span>
+				</div>
+				<div class = "time">
+					월~금요일 09:00 ~ 18:00<br>
+					주말, 공휴일 휴무
+				</div>
+			</div>
+			<div class = "imgWrap">
+				<a href = "#"><img src="/image/SiHyun/img_seller_zone.png"></a>
+			</div>
+			<div class = "imgWrap">
+				<a href = "#"><img src="/image/SiHyun/img_safe_center.png"></a>
+			</div>
+		</div>
+		<!-- 오른쪽 내용 시작(검색창)-->
+		<div class = "Rwrap">
+			<h3 class = "Rtitle">FAQ통합검색</h3>
+			<div class = "topSerchWrap">
+				<div class = "searchArea">
+
+					<form name = "keywordForm" action = "/customermain/search" method = "GET" onsubmit="cusChk(event);">
+						<input name = "keyword" class = "searchInput" type = "text" placeholder="궁금하신 내용을 입력해 주세요" >
+						<button class = "searchButton" type = "submit"></button>
+					</form>
+
+				</div>
+				<div class = "questions">
+					<strong class = "tit">자주 찾는 문의</strong>
+					<ul>
+						<li><a href = "#">교환반품A/S</a></li>
+						<li><a href = "#">이벤트/혜택</a></li>
+						<li><a href = "#">회원정보</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- 검색창 밑에 있는 FAQ TOP 5 시작 -->
+			<div class = "faqTopWrap">
+				<div class = "LfaqWrap">
+					<div class = "faqTitWrap">
+						<h3 class = "faqTit">쇼핑 FAQ TOP 5</h3>
+						<a class = "faqBtn" href = "#">
+							<span>전체보기 ></span>
+						</a>
+					</div>
+					<ul class = "faqLi">
+						<li><a href = "#">[S.POINT] 상품권을 산타클로스에서 사용 할 수 있나요?</a></li>
+						<li><a href = "#">[반품방법] 반품접수는 어떻게 하나요?</a></li>
+						<li><a href = "#">[회원탈퇴] 회원탈퇴는 어떻게 하나요?</a></li>
+						<li><a href = "#">[안녕또보냉] 보증금 확인과 환불은 어떻게 하나요?</a></li>
+						<li><a href = "#">[카드영수증] 신용카드 매출 전표 출력은 어디서 하나요 ?</a></li>
+					</ul>
+				</div>
+				<div class = "RfaqWrap">
+					<div class = "faqTitWrap">
+							<h3 class = "faqTit">판매 FAQ TOP 5</h3>
+							<a class = "faqBtn" href = "#">
+								<span>전체보기 ></span>
+							</a>
+					</div>
+					<ul class = "faqLi">
+						<li><a href = "#">[상품등록/수정] 배송비, 도서산간 추가배송비는 어떻게 설정하나요?</a></li>
+						<li><a href = "#">[세금계산서] 세금계산서는 어떻게 조회/확인 하나요?</a></li>
+						<li><a href = "#">[정산관리] 산타클로스의 정산유형(방식은) 어떻게 되나요?</a></li>
+						<li><a href = "#">[세금계산서] 고객이 세금계산서 발급(발행)을 요청할 경우 어떻게 해야 하나요?</a></li>
+						<li><a href = "#">[상품등록/수정] 상품등록은 어떻게 하나요?</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- FAQ TOP 5 밑에 있는 산타클로스 고객센터 시작-->
+			<h3 class = "titSmall">산타클로스 고객센터</h3>
+			<div class = "centerInfo">
+				<p class = "centerWrap">
+					<span class = "centerNum">1234-1234</span>
+					<span class = "centerCash">(유료)</span>
+				</p>
+				<p class = "innerInfo">
+					<span class = "innerTime">월~금요일 09:00 ~ 18:00</span>
+					<span class = "innerDay">주말, 공휴일 휴무</span>
+				</p>
+				<div class = "vcTopWrap">
+					<div class = "vcMidWrap">	
+						<strong class = "vcTit">·음성메세지 상담 안내</strong>
+						
+						<div class = "btn_wrap">
+							<button id = "btn_tooltip" onclick = "showDetail()">툴팁버튼</button>
+							<img src = "/image/SiHyun/tooltip.png" id = "img_tooltip" onclick="hideDetail()">
+						</div>
+					
+						<ul class = "vcUl">
+							<li class = "vcLi">산타클로스 고객센터에서는 고객님의 문의를 녹음으로 접수받고 답변 드리는 음성메시지 서비스를 운영하고 있습니다. 음성메시지를 남겨주시면 빠르게 확인하여 답변드리겠습니다.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer th:replace="layout/headerfooter :: footer"></footer>
+</body>
+</html>

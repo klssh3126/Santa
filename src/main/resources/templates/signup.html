@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+			<meta charset="UTF-8">
+			<title>토이저러스</title>
+			<link rel="stylesheet" href="/css/SangHa.css">
+			<script type="text/javascript">
+			function btnPop(){
+				if(document.getElementById("popover-hide").style.display=="none"){
+					document.getElementById("popover-hide").style.display='inline'
+				}else{
+					document.getElementById("popover-hide").style.display='none'
+				}
+			}
+			function popClose(){
+				 if(document.getElementById("popover-hide").style.display=="inline"){
+					 document.getElementById("popover-hide").style.display='none'
+				 }
+			}
+			</script>
+	</head>
+	<body>
+	
+		<main id="content" role="main" class="contentArea">
+			<div class="signupLayout">
+				<div class="signupWrapper">
+					<h2 class="titSignup">회원가입</h2>
+				</div>
+				<div class="signupWelcome">
+					<strong>가입하고 혜택을 받으세요</strong>
+					<span>
+						<img src="/image/SangHa/lpion-icon-pc@2x.png" alt="웰컴쿠폰팩 받고 구매해보세요, 간편하게 사용 가능한 모바일상품권과 꽝 없는 리워드! L.stamp도 함께 확인해보세요">
+					</span>
+					<button class="lotte-signup">
+						<a href="/member/signup2">산타클로즈 회원 가입하기</a>
+					</button>
+				</div>
+				<div class="signupSpeed">
+					<strong class="subTitle">
+						SNS 아이디로 간편하게 가입하세요
+						<div class="v-popover">
+							<div class="trigger" style="display: inline-block;">
+								<button class="tooltip-target big" onclick="btnPop()">상세내용확인</button>
+							</div>
+						</div>
+						<div id="popover-hide" class="tooltip popover" >
+							<div class="wrapper">
+								<div class="tooltip-inner popover-inner">
+									<div class="tooltipContent">
+										<ul class="bullet">
+											<li>회원 유형별로 일부 상품에 대한 구매가 제한될 수 있습니다.</li>
+											<li>이메일간편회원, 소셜간편회원 : 나이제한 상품, 환금성 상품 등</li>
+											<li>휴대폰간편회원 : 환금성 상품</li>
+										</ul>
+									</div>
+									<button class="btnClose" onclick="popClose()">
+										<span class="blind">Close</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</strong>
+					<div class="socialSignupWrap">
+						<button type="button" class="kakaoSignupBtn">카카오로 가입</button>
+						<button type="button" class="naverSignupBtn">네이버로 가입</button>
+						<button type="button" class="facebookSignupBtn">페이스북으로 가입</button>
+						<button type="button" class="emailSignupBtn">이메일로 가입</button>
+						<button type="button" class="phone-alignLeft">휴대폰으로 인증</button>
+					</div>
+					<div class="grayBox">
+						<strong class="title">법인회원이신가요?</strong>
+						<p class="desc">
+							법인회원은 사업자 등록번호 기준 1개 아이디만
+							<br>
+							회원가입이 가능합니다.
+						</p>
+						<a href="/#" class="btnSummit">법인회원가입</a>
+					</div>
+				</div>
+				<div class="lotteBiWrap">
+					<h2 class="toysrusLogo">
+						<a href= "/">
+						<img src="/image/Won/logo.png" alt="ToysRus" class="loaded" width="130px">
+						</a>
+					</h2>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

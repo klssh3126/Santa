@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+			<meta charset="UTF-8">
+			<title>산타클로스</title>
+			<link rel="stylesheet" href="/css/SangHa.css">
+	</head>
+	<body>
+	
+		<main id="content" role="main" class="contentArea">
+			<div class="signupLayout">
+				<div class="signupWrapper">
+					<h2 class="santaLogin"> 로그인 페이지</h2>
+				</div>
+				
+				<form action= "/member/login" method="post" class="signupForm">
+			    	<div class="formArea">
+			    		<p><label>이메일</label></p>
+			    		<input type="text" name="email" placeholder="이메일">	
+			    	</div>
+			    	<div class="formArea">
+			    		<p><label>비밀번호</label></p>
+			    		<input type="password" name="pass" placeholder="비밀번호">	
+			    	</div>
+			    	
+			    	<div class="btn">
+						<button class="signupbtn">
+							<a>로그인</a>
+						</button>
+			    	</div>
+			    </form>
+				<div class="lotteBiWrap">
+					<h2 class="toysrusLogo">
+						<a href= "/">
+						<img src="/image/Won/logo.png" alt="ToysRus" class="loaded" width="130px">
+						</a>
+					</h2>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
