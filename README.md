@@ -237,6 +237,5 @@ EX) 프로덕트 테이블의 ID를 P_num 이라고 지었더니, DB에는 produ
 
 ## 5. 알게된 점
 
-[프론트엔드 디버깅 팁](https://subicura.com/2018/02/14/javascript-debugging.html)<br>
 [버튼아이콘을 가운데 정렬하는 방법](https://klssh3126.tistory.com/32) <br>
 [토글버튼 구현하기](https://homnay.tistory.com/16)
