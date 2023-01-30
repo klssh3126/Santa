@@ -19,7 +19,7 @@
 | 역할|담당자|작업페이지|결과 확인 URL|
 |---|---|---|---|
 | (Front) 헤더푸터 <br> (Back) 관리자페이지, 이미지업로드   |  채  원  |headerfooter.html |  localhost:8080
-| (Front) 메인 <br> (Back) 브랜치관리, 장바구니, 주문, 회원등록 <br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  상품평 등록/수정  |  김영욱 | main.html | localhost:8080 |     
+| (Front) 메인 <br> (Back) 브랜치관리, 장바구니, 주문, 회원등록 <br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  상품평 등록/수정  |  김영욱(팀장) | main.html | localhost:8080 |     
 | (Front) 회원가입 <br> (Back) 관리자페이지, 이미지업로드 | 황상하 | signup.html | localhost:8080/signup
 | (Front) 고객센터 <br> (Back) 브랜치관리, 장바구니, 주문, <br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 상품평 등록/수정| 양시현 |  customercenter.html |   localhost:8080/customerCenter/
 | (Front) 로그인 <br> (Back) 상품평 등록/수정 |  천진혁 | login.html | localhost:8080/login
