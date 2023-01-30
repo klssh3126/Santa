@@ -1,7 +1,7 @@
 # 산타클로스 <!-- omit in toc -->
 
 김영욱, 안원모, 양시현, 채 원, 천진혁, 황상하 웹프로젝트 </br>
-[ 웹사이트](https://www.lotteon.com/p/display/main/toysrus?mall_no=9) </br>
+[웹사이트 배포](15.164.192.203) </br>
   
 ## 목차  <!-- omit in toc -->
 
